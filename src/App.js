@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+import Header from './components/header/header';
 import './App.css';
 
 function App() {
+  function HomePage() {
+    const fruits = ['Apple', 'Bannana', 'Kiwi'];
+
+    function handleClick() {
+        console.log('Favorite fruit selected');
+    }
+
+    return (
+        <>
+            <div>
+                <Header title="What's your favorite fruit??" />
+            </div>
+            <ul>
+                { fruits.map(fruit => <li key={Math.random() * 100}>{fruit}</li>) }
+            </ul>
+            <button onClick={handleClick}>Like</button>
+        </>
+    );
+}
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
     </div>
   );
 }
