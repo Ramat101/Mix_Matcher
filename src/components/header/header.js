@@ -5,7 +5,7 @@ function Header() {
   return (
     <header className="App-header">
       <h1>
-        SMOOTHIES <span>GET CREATIVE</span>
+        MIX & MATCHER <span>THE PERFECT BLEND</span>
       </h1>
       <Logo />
     </header>
