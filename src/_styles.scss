@@ -1,2 +1,50 @@
+// viewport sizes
 $tablet-min-width: 768px;
 $desktop-min-width: 1200px;
+
+// colors
+$color-red: #AE1100;
+$color-grey: #999;
+$color-bg: #EBECF0;
+$color-shadow: #BABECC;
+$color-white: #FFF;
+
+$ruler: 16px;
+
+body, html {
+  background-color:$color-bg;
+}
+
+/* === BASE HEADING === */
+header {
+  font-size: 30px;
+}
+
+.header-2 {
+  display: block;
+  line-height: 2em;
+  font-size: 0.7em;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-family: "Playfair Display", "Bookman", serif;
+  color: $color-grey;
+  letter-spacing: -0.005em;
+  word-spacing: 1px;
+  margin: 0;
+}
+
+section {
+  margin: $ruler*3 auto;
+}
+
+.button {
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: -2px -2px 5px $color-white, 2px 2px 5px $color-shadow;
+  }
+
+  &:active {
+    box-shadow: inset 1px 1px 2px $color-shadow, inset -1px -1px 2px $color-white;
+  }
+}

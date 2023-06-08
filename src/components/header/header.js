@@ -1,13 +1,11 @@
-import Logo from "components/logo";
-import "./header.css";
+import "./header.scss";
 
 function Header() {
   return (
-    <header className="App-header">
+    <header>
       <h1>
-        MIX & MATCHER <span>THE PERFECT BLEND</span>
+        MIX & MATCHER <span className="header-2">THE PERFECT BLEND</span>
       </h1>
-      <Logo />
     </header>
   );
 }
