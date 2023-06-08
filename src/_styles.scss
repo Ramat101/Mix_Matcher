@@ -15,6 +15,16 @@ body, html {
   background-color:$color-bg;
 }
 
+p, input, button {
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: -0.2px;
+  font-size: $ruler;
+}
+
+section {
+  margin: $ruler*3 auto;
+}
+
 /* === BASE HEADING === */
 header {
   font-size: 30px;
@@ -31,10 +41,6 @@ header {
   letter-spacing: -0.005em;
   word-spacing: 1px;
   margin: 0;
-}
-
-section {
-  margin: $ruler*3 auto;
 }
 
 .button {

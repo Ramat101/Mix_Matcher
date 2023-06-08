@@ -1,0 +1,53 @@
+@import "styles";
+
+form {
+    max-width: $ruler*30;
+    margin: 0 auto;
+  }
+  
+.formElement {
+    display: block;
+    border: 0;
+    outline: 0;
+    border-radius: $ruler*20;
+    background-color: $color-bg;
+    text-shadow: 1px 1px 0 $color-white;
+    box-shadow: -5px -5px 20px $color-white,  5px 5px 20px $color-shadow;
+    box-sizing: border-box;
+    width: 100%;
+    padding: $ruler;
+    font-weight: 600;
+    margin: $ruler*1.5 auto;
+    transition: all 0.2s ease-in-out;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.fileSelectorWrapper {
+    border: 4px dashed $color-shadow;
+    position: relative;
+    border-radius: 0;
+    line-height: 170px;
+}
+
+.fileSelectorWrapper span {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.fileSelectorWrapper input {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.submitButton {
+    color: $color-red;
+    max-width: $ruler*20;
+    margin-top: $ruler*3;
+}
