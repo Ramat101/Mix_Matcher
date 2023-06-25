@@ -1,4 +1,4 @@
-@import "styles";
+@import "styles/base";
 
 form {
     max-width: $ruler*30;
@@ -27,13 +27,20 @@ form {
     border: 4px dashed $color-shadow;
     position: relative;
     border-radius: 0;
-    line-height: 170px;
+    height: $ruler*16;
+    padding: $ruler*2;
 }
 
-.fileSelectorWrapper span {
-    display: block;
+.fileSelectorWrapper p {
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.fileSelectorWrapper p span {
+    line-height: 1.5;
 }
 
 .fileSelectorWrapper input {

@@ -1,6 +1,8 @@
+@import "styles/material";
+
 // viewport sizes
-$tablet-min-width: 768px;
-$desktop-min-width: 1200px;
+$medium-min-width: 600px;
+$expanded-min-width: 840px;
 
 // colors
 $color-red: #AE1100;
@@ -11,8 +13,25 @@ $color-white: #FFF;
 
 $ruler: 16px;
 
-body, html {
+html {
   background-color:$color-bg;
+  margin: 0 $ruler;
+
+  @media (min-width: $medium-min-width) {
+    margin: 0;
+  }
+}
+
+/**
+ * An image has fixed dimensions and if it is larger than the viewport will cause a scrollbar.
+ * A common way to deal with this problem is to give all images a max-width of 100%.
+ * This will cause the image to shrink to fit the space it has, should the viewport size be smaller than the image.
+ * However because the max-width, rather than the width is 100%, the image will not stretch larger than its natural size.
+ * It is generally safe to add the following to your stylesheet so that you will never have a problem with images causing a scrollbar.
+ */ 
+img {
+  max-width: 100%;
+  display: block;
 }
 
 p, input, button {
@@ -35,7 +54,7 @@ header {
   line-height: 2em;
   font-size: 0.7em;
   font-weight: normal;
-  text-transform: uppercase;
+  // text-transform: uppercase;
   font-family: "Playfair Display", "Bookman", serif;
   color: $color-grey;
   letter-spacing: -0.005em;

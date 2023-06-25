@@ -4,14 +4,17 @@ function Form() {
     return (
         <>
             <header>
-                <h2 className="header-2">MATCH GENERATOR</h2>
+                <h2 className="header-2">Match generator</h2>
             </header>
             <form>
                 <label className="fileSelectorWrapper formElement button">
-                    <span>Upload an Event Feedback Form</span>
+                    <p>
+                        <span>Upload an event feedback form</span>
+                        <span class="material-symbols-outlined material-icons md-36 md-dark">drive_folder_upload</span>
+                    </p>
                     <input type="file" placeholder="Upload and Event Feedback Form" />
                 </label>
-                <button className="formElement button submitButton" type="submit">Generate Matches</button>
+                <button className="formElement button submitButton" type="submit">Generate matches</button>
             </form>
         </>
     );

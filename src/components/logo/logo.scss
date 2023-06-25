@@ -1,11 +1,12 @@
-@import "styles";
+@import "styles/base";
 
 .App-logo {
   height: 85px;
-  @media (min-width: $tablet-min-width) {
+  margin: 0 auto;
+  @media (min-width: $medium-min-width) {
     height: 105px;
   }
-  @media (min-width: $desktop-min-width) {
+  @media (min-width: $expanded-min-width) {
     height: 125px;
   }
 }
