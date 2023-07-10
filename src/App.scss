@@ -1,5 +1,15 @@
+@import "styles/base";
+
 .app-container {
   text-align: center;
-  margin: 100px auto;
-  min-width: 320px;
+  margin: $ruler*3 $ruler*2;
+  min-width: $ruler*20;
+}
+
+.mainSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: $ruler*3 0px;
 }

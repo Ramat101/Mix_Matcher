@@ -14,12 +14,7 @@ $color-white: #FFF;
 $ruler: 16px;
 
 html {
-  background-color:$color-bg;
-  margin: 0 $ruler;
-
-  @media (min-width: $medium-min-width) {
-    margin: 0;
-  }
+  background-color: $color-bg;
 }
 
 /**
@@ -41,7 +36,7 @@ p, input, button {
 }
 
 section {
-  margin: $ruler*3 auto;
+  margin: $ruler*1.5 0;
 }
 
 /* === BASE HEADING === */

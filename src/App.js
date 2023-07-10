@@ -8,10 +8,9 @@ function App() {
       <section>
         <Header />
       </section>
-      <section>
+      <section className="mainSection">
         <Main />
       </section>
-
     </div>
   );
 }
