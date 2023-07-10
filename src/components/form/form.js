@@ -35,7 +35,7 @@ function Form() {
                     </p>
                     <input type="file" accept=".csv" placeholder="Upload and Event Feedback Form" ref={fileSelectorRef} onChange={handleFileSelection} />
                 </label>
-                <button disabled={!selectedFile.isFileSelected} className={`${selectedFile.isFileSelected ? '' : 'disabled' } formElement button submitButton`} type="submit">Generate matches</button>
+                <button disabled={!selectedFile.isFileSelected} className="formElement button submitButton" type="submit">Generate matches</button>
             </form>
         </>
     );
