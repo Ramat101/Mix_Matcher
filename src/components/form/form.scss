@@ -3,7 +3,19 @@
 form {
     max-width: $ruler*30;
     margin: 0 auto;
-  }
+}
+
+header {
+    margin-bottom: $ruler;
+}
+
+.formControl {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: $ruler*3;
+}
   
 .formElement {
     display: block;
@@ -17,46 +29,18 @@ form {
     width: 100%;
     padding: $ruler;
     font-weight: 600;
-    margin: $ruler*1.5 auto;
     transition: all 0.2s ease-in-out;
     appearance: none;
     -webkit-appearance: none;
 }
 
-// .fileSelectorWrapper {
-//     border: 4px dashed $color-shadow;
-//     position: relative;
-//     border-radius: 0;
-//     height: $ruler*16;
-//     padding: $ruler*2;
-// }
-
-// .fileSelectorWrapper p {
-//     width: 100%;
-//     height: 100%;
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: flex-start;
-// }
-
-// .fileSelectorWrapper p span {
-//     line-height: 1.5;
-// }
-
-// .fileSelectorWrapper input {
-//     opacity: 0;
-//     position: absolute;
-//     width: 100%;
-//     height: 100%;
-//     top: 0;
-//     left: 0;
-//     cursor: pointer;
-// }
+.formElement.error {
+    border-color: $color-red;
+}
 
 .submitButton {
     color: $color-red;
     max-width: $ruler*20;
-    margin-top: $ruler*3;
 }
 
 button:disabled {
@@ -66,4 +50,12 @@ button:disabled {
 
 .green {
     color: green;
+}
+
+.validationMessage {
+    line-height: 1.5;
+    padding: $ruler*0.5;
+    padding-right: $ruler;
+    align-self: flex-end;
+    color: $color-red;
 }

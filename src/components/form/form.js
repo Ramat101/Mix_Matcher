@@ -4,20 +4,24 @@ import FileSelector from 'components/fileSelector';
 import './form.scss';
 
 function Form() {
-    const [isFileSelected, setIsFileSelected] = useState(false);
+    const [selectedFile, setSelectedFile] = useState();
 
-    function handleFileSelection(isFileSelected) {
-        setIsFileSelected(isFileSelected);    
+    function handleFileSelection(file) {
+        setSelectedFile(file);
+        console.log('selected file', file);
     }
 
     return (
         <>
             <header>
-                <h2 className="header-2">Match generator</h2>
+                <h2 className="header2">Match generator</h2>
             </header>
             <form>
-                <FileSelector onChange={handleFileSelection} />
-                <button disabled={!isFileSelected} className="formElement button submitButton" type="submit">Generate matches</button>
+                <div className="formControl">
+                    <FileSelector onChange={handleFileSelection} />
+                    { (selectedFile && selectedFile.errorMessage) ? <span className="validationMessage">{ selectedFile.errorMessage }</span> : null }
+                </div>
+                <button disabled={!selectedFile || selectedFile.errorMessage} className="formElement button submitButton" type="submit">Generate matches</button>
             </form>
         </>
     );
