@@ -5,21 +5,22 @@ import UTILS from 'utils';
 
 import './fileSelector.scss';
 
-const FILE_PLACEHOLDER = {
-    label: 'Upload an event feedback form',
-    icon: 'drive_folder_upload',
-};
-const FILE_SELECTED = {
-    icon: 'file_download_done',
-    errorMessage: '',
-};
+function FileSelector({ onChange, cms }) {
+    const FILE_PLACEHOLDER = {
+        touched: false,
+        label: cms.label,
+        icon: cms.icon,
+    };
+    const FILE_SELECTED = {
+        touched: false,
+        icon: cms.iconSuccess,
+    };
 
-function FileSelector({ onChange }) {
     const fileSelectorRef = useRef(null);
     const [selectedFile, setSelectedFile] = useState({ ...FILE_PLACEHOLDER });
 
     async function handleFileSelection() {
-        let errorMessage = UTILS.PARSE_FILE_EXCEPTIONS.MISSING_FILE_EXCEPTION.message;
+        let parseFileException = { ...UTILS.PARSE_FILE_EXCEPTIONS.MISSING_FILE_EXCEPTION }
         let parsedFile;
         let result;
 
@@ -28,25 +29,25 @@ function FileSelector({ onChange }) {
              // parse the file
              try {
                 parsedFile = await UTILS.parseFile(rawFile);
-                errorMessage = '';
-            } catch ({ message }) {
-                errorMessage = message;
+                parseFileException = false;
+            } catch (error) {
+                parseFileException = error;
             }
         }
 
-        result = errorMessage ? { ...FILE_PLACEHOLDER, errorMessage } : { ...FILE_SELECTED, label: rawFile.name, parsedFile };
+        result = parseFileException ? { ...FILE_PLACEHOLDER, error: parseFileException, touched: true } : { ...FILE_SELECTED, label: rawFile.name, parsedFile, touched: true };
 
         setSelectedFile(result);
         onChange(result);
     }
 
     return (
-        <label className={`${selectedFile.errorMessage ? 'error' : 'valid' } formElement fileSelectorWrapper button`}>
+        <label for="fileSelector" className={`${selectedFile.error ? 'error' : 'valid' } formElement fileSelectorWrapper button`}>
             <p>
                 <span>{selectedFile.label}</span>
                 <span className={`${selectedFile.parsedFile ? 'green' : 'md-dark' } material-symbols-outlined material-icons md-36`}>{ selectedFile.icon }</span>
             </p>
-            <input type="file" accept=".csv" placeholder={selectedFile.label} ref={fileSelectorRef} onChange={handleFileSelection} required />
+            <input id="fileSelector" type="file" accept=".csv" ref={fileSelectorRef} onChange={handleFileSelection} required />
         </label>
     );
 }

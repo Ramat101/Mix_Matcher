@@ -1,10 +1,11 @@
 import "./header.scss";
 
-function Header() {
+function Header({ cms }) {
   return (
     <header>
       <h1>
-        Mix & Matcher <span className="header2">The perfect blend</span>
+        { cms.heading }
+        <span className="header2">{ cms.subheading }</span>
       </h1>
     </header>
   );

@@ -3,14 +3,14 @@ import Form from 'components/form';
 
 import './main.scss';
 
-function Main() {
+function Main({ cms }) {
     return (
         <main>
             <section>
                 <Logo />
             </section>
             <section>
-                <Form />
+                <Form cms={cms.form} />
             </section>
         </main>
 

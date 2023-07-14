@@ -1,10 +1,10 @@
 import { csvParse } from 'd3';
 
 export const PARSE_FILE_EXCEPTIONS = {
-    MISSING_FILE_EXCEPTION: {cause: 1, message: 'File not supplied'},
-    FILE_TYPE_EXCEPTION: { cause: 2, message: 'Expected a Blob' },
-    READ_EXCEPTION: { cause: 3, message: 'Couldn\'t read the file'},
-    PARSE_EXCEPTION: { cause: 4, message: 'Couln\'t parse the file'},
+    MISSING_FILE_EXCEPTION: {cause: 0, message: 'File not supplied'},
+    FILE_TYPE_EXCEPTION: { cause: 1, message: 'Expected a Blob' },
+    READ_EXCEPTION: { cause: 2, message: 'Couldn\'t read the file'},
+    PARSE_EXCEPTION: { cause: 3, message: 'Couln\'t parse the file'},
 };
 
 export async function parseFile(file) {
