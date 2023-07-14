@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
+import { path } from 'ramda';
 
-import { csvParse } from 'd3';
+import UTILS from 'utils';
 
 import './fileSelector.scss';
 
@@ -17,40 +18,16 @@ function FileSelector({ onChange }) {
     const fileSelectorRef = useRef(null);
     const [selectedFile, setSelectedFile] = useState({ ...FILE_PLACEHOLDER });
 
-    async function parseFile(file) {
-        if (!file) {
-            throw new Error({message: 'File not supplied'});
-        } else if (!(file instanceof Blob)) {
-            throw new TypeError({ message: 'Expected a Blob' })
-        } else {
-            // convert file to text
-            try {
-                const fileAsText = await file.text();
-                
-                // parse the file
-                try {
-                    return await csvParse(fileAsText);
-                } catch {
-                    throw new Error({ message: 'Couln\'t parse the file'});
-                }
-            
-            } catch {
-                throw new Error({ message: 'Couldn\'t read the file'});
-            }
-        }
-
-    }
-
     async function handleFileSelection() {
-        let errorMessage = 'File not supplied';
+        let errorMessage = UTILS.PARSE_FILE_EXCEPTIONS.MISSING_FILE_EXCEPTION.message;
         let parsedFile;
         let result;
 
-        const rawFile = fileSelectorRef.current?.files?.length && fileSelectorRef.current.files[0];
+        const rawFile = path(['current', 'files', 0], fileSelectorRef);        
         if (rawFile) {
              // parse the file
              try {
-                parsedFile = await parseFile(rawFile);
+                parsedFile = await UTILS.parseFile(rawFile);
                 errorMessage = '';
             } catch ({ message }) {
                 errorMessage = message;
