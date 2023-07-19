@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Form as ReactRouterForm } from 'react-router-dom';
 
 import FileSelector from 'components/fileSelector';
 
@@ -25,16 +26,14 @@ function Form({ cms }) {
     const { controls: { fileSelectorInput: fileSelectorInputCMS }} = cms;
     return (
         <>
-            <header>
-                <h2 className="header2">{ cms.heading }</h2>
-            </header>
-            <form>
+            {/* Client Side Routing */}
+            <ReactRouterForm method="post" id="matchGeneratorForm">
                 <div className="formControl">
                     <FileSelector onChange={handleFileSelection} cms={ fileSelectorInputCMS } />
                     { (selectedFile && selectedFile.error) ? <span className="validationMessage">{ getErrorMessage(fileSelectorInputCMS, selectedFile.error) }</span> : null }
                 </div>
-                <button disabled={!selectedFile || selectedFile.error} className="formElement button submitButton" type="submit">Generate matches</button>
-            </form>
+                <button disabled={!selectedFile || selectedFile.error} className="formElement button submitButton" type="submit">{ cms.submitButton }</button>
+            </ReactRouterForm>
         </>
     );
 }

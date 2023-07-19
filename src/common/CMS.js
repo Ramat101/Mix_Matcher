@@ -1,11 +1,13 @@
+import { fakeNetwork } from "./utils";
+
 const CMS = {
     header: {
         heading: 'Mix & Matcher',
         subheading: 'The perfect blend',
     },
     main: {
+        heading: 'Match generator',
         form: {
-            heading: 'Match generator',
             controls: {
                 fileSelectorInput: {
                     label: 'Upload an event feedback form',
@@ -21,8 +23,21 @@ const CMS = {
                     }
                 },
             },
+            submitButton: 'Generate matches',
         },
     }
 };
+
+async function getCMS() {
+    await fakeNetwork();
+    return CMS;
+}
+
+export async function cmsLoader() {
+    const CMS = await getCMS();
+    return { CMS };
+}
+
+
 
 export default CMS;

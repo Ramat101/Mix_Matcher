@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
 import { path } from 'ramda';
 
-import UTILS from 'utils';
+import { PARSE_FILE_EXCEPTIONS } from 'common/utils';
+import { ACTIONS } from 'store';
 
 import './fileSelector.scss';
 
@@ -20,7 +21,7 @@ function FileSelector({ onChange, cms }) {
     const [selectedFile, setSelectedFile] = useState({ ...FILE_PLACEHOLDER });
 
     async function handleFileSelection() {
-        let parseFileException = { ...UTILS.PARSE_FILE_EXCEPTIONS.MISSING_FILE_EXCEPTION }
+        let parseFileException = { ...PARSE_FILE_EXCEPTIONS.MISSING_FILE_EXCEPTION }
         let parsedFile;
         let result;
 
@@ -28,7 +29,7 @@ function FileSelector({ onChange, cms }) {
         if (rawFile) {
              // parse the file
              try {
-                parsedFile = await UTILS.parseFile(rawFile);
+                parsedFile = await ACTIONS.PARSE_FILE(rawFile);
                 parseFileException = false;
             } catch (error) {
                 parseFileException = error;
@@ -42,12 +43,12 @@ function FileSelector({ onChange, cms }) {
     }
 
     return (
-        <label for="fileSelector" className={`${selectedFile.error ? 'error' : 'valid' } formElement fileSelectorWrapper button`}>
+        <label htmlFor="fileSelector" className={`${selectedFile.error ? 'error' : 'valid' } formElement fileSelectorWrapper button`}>
             <p>
                 <span>{selectedFile.label}</span>
-                <span className={`${selectedFile.parsedFile ? 'green' : 'md-dark' } material-symbols-outlined material-icons md-36`}>{ selectedFile.icon }</span>
+                <span className={`${(selectedFile.touched && !selectedFile.error) ? 'green' : 'md-dark' } material-symbols-outlined material-icons md-36`}>{ selectedFile.icon }</span>
             </p>
-            <input id="fileSelector" type="file" accept=".csv" ref={fileSelectorRef} onChange={handleFileSelection} required />
+            <input id="fileSelector" name="fileSelector" type="file" accept=".csv" ref={fileSelectorRef} onChange={handleFileSelection} required />
         </label>
     );
 }

@@ -1,5 +1,6 @@
+import { Outlet } from 'react-router-dom';
+
 import Logo from 'components/logo';
-import Form from 'components/form';
 
 import './main.scss';
 
@@ -10,7 +11,10 @@ function Main({ cms }) {
                 <Logo />
             </section>
             <section>
-                <Form cms={cms.form} />
+                <header>
+                    <h2 className="header2">{ cms.heading }</h2>
+                </header>
+                <Outlet />
             </section>
         </main>
 

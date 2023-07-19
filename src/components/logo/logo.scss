@@ -1,6 +1,6 @@
 @import "styles/base";
 
-.App-logo {
+.appLogo {
   height: 85px;
   margin: 0 auto;
   @media (min-width: $medium-min-width) {
@@ -12,12 +12,12 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 10s linear;
+  .appLogo {
+    animation: appLogoSpin infinite 10s linear;
   }
 }
 
-@keyframes App-logo-spin {
+@keyframes appLogoSpin {
   from {
     transform: rotateY(0deg);
   }

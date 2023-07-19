@@ -1,9 +1,11 @@
-import CMS from 'CMS';
+import { useLoaderData } from 'react-router-dom';
 import Header from "components/header";
 import Main from "components/main";
 import "./App.scss";
 
 function App() {
+  const { CMS } = useLoaderData();
+
   return (
     <div className="app-container">
       <section>
