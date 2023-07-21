@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 
 import Logo from 'components/logo';
+import Subheader from 'components/subheader';
 
 import './main.scss';
 
@@ -11,9 +12,7 @@ function Main({ cms }) {
                 <Logo />
             </section>
             <section>
-                <header>
-                    <h2 className="header2">{ cms.heading }</h2>
-                </header>
+                <Subheader cms={cms.subheading} />
                 <Outlet />
             </section>
         </main>

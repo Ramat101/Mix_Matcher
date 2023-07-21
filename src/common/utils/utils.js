@@ -7,7 +7,7 @@ export const PARSE_FILE_EXCEPTIONS = {
     PARSE_EXCEPTION: { cause: 3, message: 'Couln\'t parse the file'},
 };
 
-export async function parseFile(file) {
+export const parseFile = async (file) => {
     if (!file) {
         throw new Error(...PARSE_FILE_EXCEPTIONS.MISSING_FILE_EXCEPTION);
     } else if (!(file instanceof Blob)) {
@@ -33,17 +33,20 @@ export async function parseFile(file) {
 // fake a cache so we don't slow down stuff we've already seen
 let fakeCache = {};
 
-export async function fakeNetwork(key) {
-  if (!key) {
-    fakeCache = {};
-  }
+export const fakeNetwork = async (key, delay) => {
+    if (!key) {
+        fakeCache = {};
+    }
 
-  if (fakeCache[key]) {
-    return;
-  }
+    if (fakeCache[key]) {
+        return;
+    }
 
-  fakeCache[key] = true;
-  return new Promise(res => {
-    setTimeout(res, Math.random() * 800);
-  });
+    fakeCache[key] = true;
+    return new Promise(res => {
+        setTimeout(res, (delay || Math.random() * 800));
+    });
 }
+
+export const isLoading = (navigation) => ((navigation.state === 'loading') || (navigation.state === 'submitting'));
+

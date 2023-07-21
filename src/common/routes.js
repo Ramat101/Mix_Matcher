@@ -4,6 +4,7 @@ import {
 
 import App from "App";
 import Form from "components/form";
+import Results from 'components/results';
 import CMS, { cmsLoader } from 'common/CMS';
 import ErrorBoundary from "components/errorBoundary";
 import { ACTIONS } from "store";
@@ -12,14 +13,24 @@ export const router = createBrowserRouter([
     {
       path: "/",
       element: <App />,
-      errorElement: <ErrorBoundary />,
       loader: cmsLoader,
+      errorElement: <ErrorBoundary />,
       children: [
         {
-          path: "form",
-          element: <Form cms={CMS.main.form} />,
-          action: ACTIONS.SUBMIT_FORM,
+          errorElement: <ErrorBoundary />,
+          children: [
+            {
+              index: true,
+              element: <Form cms={CMS.main.form} />,
+              action: ACTIONS.SUBMIT_FORM,
+            },
+            {
+              path: 'results',
+              element: <Results />,
+              loader: ACTIONS.LOAD_RESULTS,
+            },
+          ],
         },
-      ]
+      ],
     },
 ]);

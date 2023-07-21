@@ -1,0 +1,17 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+.submitting {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: 
+        typing 2.9s steps(25, end) infinite,
+}
+
+@keyframes typing {
+    0% { width: 0%; }
+    70% { width: 100%; }
+}

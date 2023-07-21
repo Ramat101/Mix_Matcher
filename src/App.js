@@ -7,7 +7,7 @@ function App() {
   const { CMS } = useLoaderData();
 
   return (
-    <div className="app-container">
+    <div className="appContainer">
       <section>
         <Header cms={CMS.header} />
       </section>

@@ -6,7 +6,11 @@ const CMS = {
         subheading: 'The perfect blend',
     },
     main: {
-        heading: 'Match generator',
+        subheading: {
+            index: 'Match generator',
+            loading: 'Blending matches . . .',
+            results: 'Results',
+        },
         form: {
             controls: {
                 fileSelectorInput: {
@@ -28,16 +32,14 @@ const CMS = {
     }
 };
 
-async function getCMS() {
+const getCMS = async () => {
     await fakeNetwork();
     return CMS;
 }
 
-export async function cmsLoader() {
+export const cmsLoader = async () => {
     const CMS = await getCMS();
     return { CMS };
 }
-
-
 
 export default CMS;
