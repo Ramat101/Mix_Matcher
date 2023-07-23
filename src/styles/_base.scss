@@ -42,6 +42,11 @@ p, input, button {
 
 section {
   margin: $ruler*1.5 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* === BASE HEADING === */

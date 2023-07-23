@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import Accordion from 'components/accordion';
 import './results.scss';
 
 function Results() {
@@ -8,8 +9,13 @@ function Results() {
     useEffect(() => {
         const timer = setTimeout(() => { setShouldFadeIn(true) }, 10);
         return () => clearTimeout(timer);
-    }, [])
-    return (<p className={`fade-in ${shouldFadeIn ? 'fade-in-complete' : null}`}>Here are your matches!</p>);
+    }, []);
+
+    return (
+        <div className={`fade-in ${shouldFadeIn ? 'fade-in-complete' : null} resultsContainer`}>
+            <Accordion />
+        </div>
+    );
 }
 
 export default Results;
