@@ -1,12 +1,15 @@
 import { useRef, useState } from 'react';
 import { path } from 'ramda';
+import { useContext } from 'react';
 
+import { CMSContext } from 'common/CMS';
 import { PARSE_FILE_EXCEPTIONS } from 'common/utils';
 import { ACTIONS } from 'store';
 
 import './fileSelector.scss';
 
-function FileSelector({ onChange, cms }) {
+function FileSelector({ onChange }) {
+    const { main: { form: { controls: { fileSelectorInput: cms }}}} = useContext(CMSContext);
     const FILE_PLACEHOLDER = {
         touched: false,
         label: cms.label,

@@ -5,14 +5,14 @@ import Subheader from 'components/subheader';
 
 import './main.scss';
 
-function Main({ cms }) {
+function Main() {
     return (
         <main>
             <section>
                 <Logo />
             </section>
             <section>
-                <Subheader cms={cms.subheading} />
+                <Subheader />
                 <Outlet />
             </section>
         </main>

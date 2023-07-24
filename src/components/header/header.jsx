@@ -1,6 +1,11 @@
+import { useContext } from "react";
+import { CMSContext } from "common/CMS";
+
 import "./header.scss";
 
-function Header({ cms }) {
+function Header() {
+  const { header: cms } = useContext(CMSContext);
+
   return (
     <header>
       <h1>

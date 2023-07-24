@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
           children: [
             {
               index: true,
-              element: <Form cms={CMS.main.form} />,
+              element: <Form />,
               action: ACTIONS.SUBMIT_FORM,
             },
             {

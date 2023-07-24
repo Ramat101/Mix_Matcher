@@ -1,14 +1,17 @@
 import { useState } from 'react';
+import { useContext } from 'react';
 import { Form as ReactRouterForm, useNavigation } from 'react-router-dom';
 
 import FileSelector from 'components/fileSelector';
 import { isLoading } from 'common/utils';
+import { CMSContext } from 'common/CMS';
 
 import './form.scss';
 
-function Form({ cms }) {
+function Form() {
     const [selectedFile, setSelectedFile] = useState();
     const navigation = useNavigation();
+    const { main: { form: cms } } = useContext(CMSContext);
 
     const handleFileSelection = (file) => {
         console.log('selected file', file);
@@ -31,7 +34,7 @@ function Form({ cms }) {
             {/* Client Side Routing */}
             <ReactRouterForm method="post" id="matchGeneratorForm" className={`${isLoading(navigation) ? 'hidden' : null}`}>
                 <div className="formControl">
-                    <FileSelector onChange={handleFileSelection} cms={ fileSelectorInputCMS } />
+                    <FileSelector onChange={handleFileSelection} />
                     { (selectedFile && selectedFile.error) ? <span className="validationMessage">{ getErrorMessage(fileSelectorInputCMS, selectedFile.error) }</span> : null }
                 </div>
                 <button disabled={!selectedFile || selectedFile.error} className="formElement button submitButton" type="submit">{ cms.submitButton }</button>

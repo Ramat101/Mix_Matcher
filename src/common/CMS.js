@@ -1,3 +1,5 @@
+import { createContext } from "react";
+
 import { fakeNetwork } from "./utils";
 
 const CMS = {
@@ -29,7 +31,11 @@ const CMS = {
             },
             submitButton: 'Generate matches',
         },
-    }
+    },
+    error: {
+        heading: 'Oops!',
+        body: 'Sorry, an unexpected error has occurred.',
+    },
 };
 
 const getCMS = async () => {
@@ -40,6 +46,16 @@ const getCMS = async () => {
 export const cmsLoader = async () => {
     const CMS = await getCMS();
     return { CMS };
+}
+
+export const CMSContext = createContext(CMS);
+
+export const CMSProvider = ({ children }) => {
+    return (
+        <CMSContext.Provider value={CMS}>
+            {children}
+        </CMSContext.Provider>
+    );
 }
 
 export default CMS;
