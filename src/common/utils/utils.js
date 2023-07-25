@@ -30,6 +30,44 @@ export const parseFile = async (file) => {
     }
 }
 
+const MATCHING_OPTIONS = {
+    INTERESTED: 'Interested',
+    MAYBE: 'Maybe',
+    NOT_INTERESTED: 'Not interested at this time',
+};
+
+const EVENT_FEEDBACK_FORM_KEYS = {
+    NAME: 'Name (Optional)',
+}
+
+export const generateMatches = (parsedFile) => {
+    // reduce parsedFile to an object enumerating participants and their matches
+    // const results = parsedFile.reduce((acc, curr) => {
+    //     const name = curr[EVENT_FEEDBACK_FORM_KEYS.NAME];
+    //     acc[name] = {
+    //         name,
+    //         [MATCHING_OPTIONS.INTERESTED]: [],
+    //         [MATCHING_OPTIONS.MAYBE]: [],
+    //     };
+    //     return acc;
+    // }, {});
+    
+    const results = parsedFile.map(participant => ({ name: participant[EVENT_FEEDBACK_FORM_KEYS.NAME], [MATCHING_OPTIONS.INTERESTED]: [], [MATCHING_OPTIONS.MAYBE]: [] }));
+
+    for(let r = 0; r < results.length; r++) {
+        for(let c = 0; c < parsedFile.length; c++) {
+            if (r === c) {
+                continue;
+            }
+            const curr = results[r].name;
+            const matchStatus = parsedFile[c][curr];
+
+            results[r][matchStatus]?.push(parsedFile[c][EVENT_FEEDBACK_FORM_KEYS.NAME]);
+        }
+    }
+    console.log('results', results);
+};
+
 // fake a cache so we don't slow down stuff we've already seen
 let fakeCache = {};
 

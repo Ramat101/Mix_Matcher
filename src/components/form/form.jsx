@@ -14,7 +14,6 @@ function Form() {
     const { main: { form: cms } } = useContext(CMSContext);
 
     const handleFileSelection = (file) => {
-        console.log('selected file', file);
         setSelectedFile(file);
     };
 
