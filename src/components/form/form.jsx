@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import { Form as ReactRouterForm, useNavigation } from 'react-router-dom';
 
 import FileSelector from 'components/fileSelector';
 import { isLoading } from 'common/utils';
 import { CMSContext } from 'common/CMS';
+import { ACTIONS } from 'store';
 
 import './form.scss';
 
@@ -15,6 +15,7 @@ function Form() {
 
     const handleFileSelection = (file) => {
         setSelectedFile(file);
+        ACTIONS.SET_SELECTED_FILE(file);
     };
 
     const getErrorMessage = (fileSelectorInputCMS, error) => {

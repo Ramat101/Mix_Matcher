@@ -3,8 +3,7 @@ import { path } from 'ramda';
 import { useContext } from 'react';
 
 import { CMSContext } from 'common/CMS';
-import { PARSE_FILE_EXCEPTIONS } from 'common/utils';
-import { ACTIONS } from 'store';
+import { PARSE_FILE_EXCEPTIONS, parseFile } from 'common/utils';
 
 import './fileSelector.scss';
 
@@ -32,7 +31,7 @@ function FileSelector({ onChange }) {
         if (rawFile) {
              // parse the file
              try {
-                parsedFile = await ACTIONS.PARSE_FILE(rawFile);
+                parsedFile = await parseFile(rawFile);
                 parseFileException = false;
             } catch (error) {
                 parseFileException = error;

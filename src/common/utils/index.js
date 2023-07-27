@@ -1,3 +1,3 @@
-import { PARSE_FILE_EXCEPTIONS, parseFile, fakeNetwork, isLoading, generateMatches } from "./utils";
+import { PARSE_FILE_EXCEPTIONS, parseFile, fakeNetwork, isLoading, generateMatches, resultsLoader, MATCHING_OPTIONS } from "./utils";
 
-export { parseFile, PARSE_FILE_EXCEPTIONS, fakeNetwork, isLoading, generateMatches };
+export { parseFile, PARSE_FILE_EXCEPTIONS, fakeNetwork, isLoading, generateMatches, resultsLoader, MATCHING_OPTIONS };

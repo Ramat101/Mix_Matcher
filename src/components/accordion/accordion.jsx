@@ -1,4 +1,6 @@
 import { Accordion as LibraryAccordion, AccordionItem as LibraryAccordionItem } from '@szhsin/react-accordion';
+import { MATCHING_OPTIONS } from 'common/utils';
+
 import './accordion.scss';
 
 /**
@@ -17,27 +19,16 @@ const AccordionItem = ({ header, ...rest }) => (
     />
   );
 
-function Accordion() {
+function Accordion({ matchElements }) {
   return (
     <LibraryAccordion>
-        <AccordionItem header="Name 1">
-            <p>Matches: Name 1, Name 2 Name 3</p>
-            <p>Maybe's: Name 3, Name 4, Name 5</p>
+      {matchElements.map((element, index) => (
+        <AccordionItem key={index} header={element.name}>
+          <span className='item'>Matches: { [...element[MATCHING_OPTIONS.INTERESTED]].join(', ') }</span>
+          <span className='item'>Also consider: { [...element[MATCHING_OPTIONS.MAYBE]].join(' ') }</span>
         </AccordionItem>
-
-        <AccordionItem header="Name 2">
-        <ul>
-                <li>Match 1</li>
-                <li>Match 2</li>
-                <li>Match 3</li>
-            </ul>
-        </AccordionItem>
-
-        <AccordionItem header="Name 3">
-            Suspendisse massa risus, pretium id interdum in, dictum sit
-            amet ante. Fusce vulputate purus sed tempus feugiat.
-        </AccordionItem>
-  </LibraryAccordion>
+      ))}
+    </LibraryAccordion>
   );
 }
 

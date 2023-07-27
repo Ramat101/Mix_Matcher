@@ -1,4 +1,8 @@
 import { csvParse } from 'd3';
+import { values, isEmpty } from 'ramda';
+
+import { ACTIONS } from 'store';
+import { MOCK_RESULTS } from 'common/mocks';
 
 export const PARSE_FILE_EXCEPTIONS = {
     MISSING_FILE_EXCEPTION: {cause: 0, message: 'File not supplied'},
@@ -30,42 +34,60 @@ export const parseFile = async (file) => {
     }
 }
 
-const MATCHING_OPTIONS = {
+const INTERESTED_SET = new Set(['Interested', 'Interested. I would like to get a phone number.', 'Interested. Please set up via shadchan.']);
+const MAYBE_SET = new Set(['Maybe', 'Maybe?']);
+
+export const MATCHING_OPTIONS = {
     INTERESTED: 'Interested',
     MAYBE: 'Maybe',
-    NOT_INTERESTED: 'Not interested at this time',
 };
 
 const EVENT_FEEDBACK_FORM_KEYS = {
-    NAME: 'Name (Optional)',
+    NAME: 'Name (Optional) ',
 }
 
 export const generateMatches = (parsedFile) => {
-    // reduce parsedFile to an object enumerating participants and their matches
-    // const results = parsedFile.reduce((acc, curr) => {
-    //     const name = curr[EVENT_FEEDBACK_FORM_KEYS.NAME];
-    //     acc[name] = {
-    //         name,
-    //         [MATCHING_OPTIONS.INTERESTED]: [],
-    //         [MATCHING_OPTIONS.MAYBE]: [],
-    //     };
-    //     return acc;
-    // }, {});
-    
-    const results = parsedFile.map(participant => ({ name: participant[EVENT_FEEDBACK_FORM_KEYS.NAME], [MATCHING_OPTIONS.INTERESTED]: [], [MATCHING_OPTIONS.MAYBE]: [] }));
+    // reduce parsedFile into an object enumerating participants and their matches
+    const matches = parsedFile.reduce((acc, curr) => {
+        const name = curr[EVENT_FEEDBACK_FORM_KEYS.NAME];
+        if(name) {
+            acc[name] = {
+                'name': name,
+                [MATCHING_OPTIONS.INTERESTED]: new Set(),
+                [MATCHING_OPTIONS.MAYBE]: new Set(),
+            };
+        }
+        return acc;
+    }, {});
 
-    for(let r = 0; r < results.length; r++) {
+    // identify who was interested in participant
+    const names = Object.keys(matches);
+    for(let  name of names) {
         for(let c = 0; c < parsedFile.length; c++) {
-            if (r === c) {
+            if (name === parsedFile[c][EVENT_FEEDBACK_FORM_KEYS.NAME]) {
                 continue;
             }
-            const curr = results[r].name;
-            const matchStatus = parsedFile[c][curr];
-
-            results[r][matchStatus]?.push(parsedFile[c][EVENT_FEEDBACK_FORM_KEYS.NAME]);
+            const matchStatus = parsedFile[c][name];
+            
+            if (INTERESTED_SET.has(matchStatus)) {
+                matches[name][MATCHING_OPTIONS.INTERESTED].add(parsedFile[c][EVENT_FEEDBACK_FORM_KEYS.NAME]);
+            } else if (MAYBE_SET.has(matchStatus)) {
+                matches[name][MATCHING_OPTIONS.MAYBE].add(parsedFile[c][EVENT_FEEDBACK_FORM_KEYS.NAME]);
+            }
         }
     }
-    console.log('results', results);
+    
+    // determine if particpant was mutually interested, otherwise suggest as a maybe
+    for(let name of names) {
+        for (let interest of matches[name][MATCHING_OPTIONS.INTERESTED]) {
+            if (!matches[interest][MATCHING_OPTIONS.INTERESTED].has(name)) {
+                matches[name][MATCHING_OPTIONS.INTERESTED].delete(interest);
+                matches[name][MATCHING_OPTIONS.MAYBE].add(interest);
+            }
+        }
+    }
+
+    return matches;
 };
 
 // fake a cache so we don't slow down stuff we've already seen
@@ -86,5 +108,14 @@ export const fakeNetwork = async (key, delay) => {
     });
 }
 
-export const isLoading = (navigation) => ((navigation.state === 'loading') || (navigation.state === 'submitting'));
+export const resultsLoader = async () => {
+    const matchObj = await ACTIONS.GET_MATCHES();
+    const matches = values(matchObj);
 
+    // temporary for testing
+    const results = isEmpty(matches) ? MOCK_RESULTS : matches;
+
+    return { results };
+}
+
+export const isLoading = (navigation) => ((navigation.state === 'loading') || (navigation.state === 'submitting'));

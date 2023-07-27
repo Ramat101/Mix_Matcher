@@ -1,32 +1,42 @@
 import { redirect } from 'react-router-dom';
-import { parseFile, fakeNetwork, generateMatches } from 'common/utils';
+import { fakeNetwork, generateMatches } from 'common/utils';
+
+// to-do: replace with real state management solution
 
 export const STATE = {
-    parsedFile: {},
+    selectedFile: {},
+    matches: [],
 };
-const PARSE_FILE = async (rawFile)=>  {
-    const parsedFile = await parseFile(rawFile);
-    console.log('parsed file', parsedFile);
-    STATE.parsedFile = parsedFile;
-    return parsedFile;
-}
 
-const GENERATE_MATCHES = () => {
-    const matches = generateMatches(STATE.parsedFile);
+const SET_SELECTED_FILE = (file) => {
+    STATE.selectedFile = file.parsedFile;
+};
+
+const GET_SELECTED_FILE = () => {
+    return STATE.selectedFile;
+};
+
+const SET_MATCHES = (matches) => {
+    STATE.matches = matches;
+};
+
+const GET_MATCHES = () => {
+    return STATE.matches;
+};
+
+const GENERATE_MATCHES = async (parsedFile) => {
+    const matches = generateMatches(parsedFile);
+    SET_MATCHES(matches);
 }
 
 const SUBMIT_FORM = async () => {
     await fakeNetwork(undefined, 3000);
-    GENERATE_MATCHES();
+    await GENERATE_MATCHES(GET_SELECTED_FILE());
     return redirect('./results');
 }
 
-const LOAD_RESULTS = async () => {
-    return STATE.parsedFile;
-}
-
 export const ACTIONS = {
-    PARSE_FILE,
     SUBMIT_FORM,
-    LOAD_RESULTS,
+    SET_SELECTED_FILE,
+    GET_MATCHES,
 };
