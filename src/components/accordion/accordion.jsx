@@ -1,5 +1,6 @@
 import { Accordion as LibraryAccordion, AccordionItem as LibraryAccordionItem } from '@szhsin/react-accordion';
 import { MATCHING_OPTIONS } from 'common/utils';
+import MatchTable from 'components/matchTable';
 
 import './accordion.scss';
 
@@ -24,8 +25,9 @@ function Accordion({ matchElements }) {
     <LibraryAccordion>
       {matchElements.map((element, index) => (
         <AccordionItem key={index} header={element.name}>
-          <span className='item'>Matches: { [...element[MATCHING_OPTIONS.INTERESTED]].join(', ') }</span>
-          <span className='item'>Also consider: { [...element[MATCHING_OPTIONS.MAYBE]].join(' ') }</span>
+          {/** Need to convert element's Sets to Arrays */}
+          <MatchTable data={[...element[MATCHING_OPTIONS.INTERESTED]]} header={MATCHING_OPTIONS.INTERESTED} />
+          <MatchTable data={[...element[MATCHING_OPTIONS.MAYBE]]} header={MATCHING_OPTIONS.MAYBE} />
         </AccordionItem>
       ))}
     </LibraryAccordion>
