@@ -9,7 +9,12 @@ main {
   border-radius: 16px;
   box-shadow: 0 10px 20px rgba(128, 128, 128, 0.3);
   background-color: #EEEEEE;
-  padding: $ruler*2 $ruler*4;
-  max-width: $ruler*33;
+  padding: $ruler*2 $ruler*1.5;
+  max-width: $ruler*43;
   width: 100%;
+  box-sizing: border-box;
+
+  @media screen and (min-width: $medium-min-width) {
+    padding: $ruler*2 $ruler*4;
+  }
 }
