@@ -3,10 +3,10 @@ Utility intended to sort mutual matches post a matching event (ex. speed dating 
 
 ## Screenshots
 ### Form Page
-![Form Page](./public/form.png)
+![Form Page](https://github.com/Ramat101/Mix_Matcher/blob/master/public/Form.png)
 
 ### Results Page
-![Results Page](./public/results.png)
+![Results Page](https://github.com/Ramat101/Mix_Matcher/blob/master/public/Results.png)
 
 ## How to use:
 1. Create a user feedback form (ex. [Google Forms](https://www.google.com/forms/about/))
