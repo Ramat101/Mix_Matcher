@@ -31,6 +31,22 @@ const CMS = {
             },
             submitButton: 'Generate matches',
         },
+        results: {
+            title: 'Matches',
+            searchInput: {
+                placeholder: 'Find participant',
+            },
+            email: {
+                subject: 'Your event matches',
+                body: {
+                    introduction: 'Hi ',
+                    generic: ', \n\nThanks for joining the event. Enclosed are your matches. Let me know if you would like to move ahead with any of these suggestions. \n \n',
+                    matches: 'Matches: ',
+                    maybes: '. \nAlso consider: ',
+                    noMatches: ', \n\nThank you for joining the event. There were no matches for you at this time. We look forward to seeing you at future events.',
+                }
+            },
+        },
     },
     error: {
         heading: 'Oops!',

@@ -51,4 +51,33 @@ span.item {
     }
   }
 }
-  
+
+.emailContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: $ruler*0.5;
+  padding: $ruler;
+
+  @media screen and (min-width: $medium-min-width) {
+    justify-content: flex-end;
+  }
+}
+
+.emailIcon {
+  margin-right: $ruler*0.5;
+}
+
+.emailContainer a {
+  color: blue;
+  align-self: baseline;
+  text-decoration: none;
+}
+
+.emailContainer a:hover {
+  text-decoration: underline;
+}
+
+.accordionContent {
+  margin: $ruler*0.5;
+}

@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
 
+import { CMSContext } from 'common/CMS';
 import ResultsAccordion from 'components/resultsAccordion';
 import SearchBox from 'components/searchBox';
 import './results.scss';
@@ -10,6 +11,7 @@ function Results() {
     const [searchTerm, setSearchTerm] = useState('');
 
     const { results: matches } = useLoaderData();
+    const { main: { results: cms } } = useContext(CMSContext);
 
     useEffect(() => {
         const timer = setTimeout(() => { setShouldFadeIn(true) }, 10);
@@ -22,11 +24,11 @@ function Results() {
 
     return (
         <div className='resultsContainer'>
-            <div className='searchBox'>
-                <SearchBox onChange={setSearchTerm} value={searchTerm} />
-            </div>         
+            <div className="searchBoxContainer">
+                <SearchBox onChange={setSearchTerm} value={searchTerm} cms={cms.searchInput} />
+            </div>
             <div className={`fade-in ${shouldFadeIn ? 'fade-in-complete' : null} resultsBox`}>
-                <caption className='heading3'>Matches</caption>
+                <p className='heading3 title'>{ cms.title }</p>
                 <ResultsAccordion matches={filteredMatches} />
             </div>
         </div>

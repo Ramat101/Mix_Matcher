@@ -34,7 +34,7 @@ function Form() {
             {/* Client Side Routing */}
             <ReactRouterForm method="post" id="matchGeneratorForm" className={`${isLoading(navigation) ? 'hidden' : null}`}>
                 <div className="formControl">
-                    <FileSelector onChange={handleFileSelection} />
+                    <FileSelector onChange={handleFileSelection} cms={fileSelectorInputCMS} />
                     { (selectedFile && selectedFile.error) ? <span className="validationMessage">{ getErrorMessage(fileSelectorInputCMS, selectedFile.error) }</span> : null }
                 </div>
                 <button disabled={!selectedFile || selectedFile.error} className="formElement button submitButton" type="submit">{ cms.submitButton }</button>

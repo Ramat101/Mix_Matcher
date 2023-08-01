@@ -1,6 +1,6 @@
-import './matchTable.scss';
+import './singleColumnTable.scss';
 
-function MatchTable({ data = [], header }) {
+function SingleColumnTable({ data = [], header }) {
       return (
         <>
           {data.length ? (
@@ -11,9 +11,9 @@ function MatchTable({ data = [], header }) {
                 </tr>
               </thead>
               <tbody>
-                {data.map((interestedMatch) => (
-                  <tr>
-                    <td data-label={header}>{interestedMatch}</td>
+                {data.map((elem, index) => (
+                  <tr key={index}>
+                    <td data-label={header}>{elem}</td>
                   </tr>
                 ))}
               </tbody>
@@ -23,4 +23,4 @@ function MatchTable({ data = [], header }) {
       );
 }
 
-export default MatchTable;
+export default SingleColumnTable;

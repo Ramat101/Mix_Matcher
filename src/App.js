@@ -11,7 +11,7 @@ function App() {
     <CMSProvider value={CMS}>
       <div className="appContainer">
         <section>
-          <Header />
+          <Header cms={CMS.header} />
         </section>
         <section className="mainSection">
           <Main />

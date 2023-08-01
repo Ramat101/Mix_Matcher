@@ -44,6 +44,7 @@ export const MATCHING_OPTIONS = {
 
 const EVENT_FEEDBACK_FORM_KEYS = {
     NAME: 'Name (Optional) ',
+    EMAIL: 'Email',
 }
 
 export const generateMatches = (parsedFile) => {
@@ -52,7 +53,8 @@ export const generateMatches = (parsedFile) => {
         const name = curr[EVENT_FEEDBACK_FORM_KEYS.NAME];
         if(name) {
             acc[name] = {
-                'name': name,
+                name,
+                email: curr[EVENT_FEEDBACK_FORM_KEYS.EMAIL] || 'example@gmail.com',
                 [MATCHING_OPTIONS.INTERESTED]: new Set(),
                 [MATCHING_OPTIONS.MAYBE]: new Set(),
             };
@@ -117,5 +119,23 @@ export const resultsLoader = async () => {
 
     return { results };
 }
+
+const getEmailBody = (name, matches, maybes, cms) => {
+    let body;
+
+    body = `${cms.introduction}${name}`;
+    if (isEmpty(matches) && isEmpty(maybes)) {
+        body += cms.noMatches;
+    } else {
+        body += `${cms.generic}${cms.matches}[${matches.join(', ')}]${cms.maybes}[${maybes.join(', ')}].`;
+    }
+
+    return encodeURIComponent(body);
+}
+
+export const getEmailLink = (name, email, cms, matches, maybe) => {
+    const body = getEmailBody(name, matches, maybe, cms.body);
+    return `mailto:${email}?subject=${cms.subject}&body=${body}`;
+};
 
 export const isLoading = (navigation) => ((navigation.state === 'loading') || (navigation.state === 'submitting'));
